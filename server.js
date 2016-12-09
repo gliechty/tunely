@@ -8,6 +8,8 @@ var app = express();
 // serve static files from public folder
 app.use(express.static(__dirname + '/public'));
 
+var db = require('./models');
+
 /************
  * DATABASE *
  ************/
@@ -76,9 +78,11 @@ app.get('/api', function api_index (req, res){
 
 
 app.get('/api/albums', function album_index(req, res){
-  console.log("json sending");
-  res.json({albums:albums});
-});
+  // db.Album.find({}, function (err, albums){ 
+    res.json(albums);
+  });
+  // res.json({albums:albums});
+// });
 
 /**********
  * SERVER *

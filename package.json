@@ -23,5 +23,8 @@
   "directories": {
     "doc": "docs"
   },
-  "keywords": []
+  "keywords": [],
+  "devDependencies": {
+    "mongoose": "^4.7.2"
+  }
 }
