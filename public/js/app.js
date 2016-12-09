@@ -33,7 +33,16 @@ sampleAlbums.push({
            });
 /* end of hard-coded data */
 
-
+$('#album-form form').submit(function(){
+  alert("submitted!");
+  // event.preventDefault();
+  // var formdata = $(this).serialize();
+  // console.log(formdata);
+  // $.post('/api/albums', function(req, res){
+  //   console.log(req.body);
+  // });
+  // $(this).trigger("reset");
+});
 
 // console.log("getting this far");
 $(document).ready(function(){
@@ -43,13 +52,6 @@ $(document).ready(function(){
     }
   });
 });
-
-$('#album-form form').submit(function(data){
-  $.post('/api/albums', function(req, res){
-    console.log(req.body);
-  });
-});
-
 
 
 // this function takes a single album and renders it to the page
