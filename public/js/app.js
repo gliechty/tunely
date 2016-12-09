@@ -5,7 +5,6 @@
  *
  */
 
-
 /* hard-coded data! */
 var sampleAlbums = [];
 sampleAlbums.push({
@@ -34,44 +33,23 @@ sampleAlbums.push({
            });
 /* end of hard-coded data */
 
-// var ajax = $.get("http://localhost:3000/api/albums");
-//   $(document).ready(function(albums){
-//     for (i=0; i<albums.length; i++){
 
-//     }
-//   });
-
-
-// var appendAlbums =
-//   $.ajax({
-//   dataType: "json",
-//   url: "http://localhost:3000/api/albums",
-//   success: function(data){
-//   event.preventDefault();
-//   var div = $("#albums");
-//     for (var i=0; i<data.length; i++){
-//       div.append(data[i]);
-//     }
-//   }
-//   });
 
 // console.log("getting this far");
 $(document).ready(function(){
-  console.log("maybe?");
   $.get('/api/albums', function(response){
-    console.log(response);
     for (i=0; i<(response).length; i++){
     $('#albums').append(renderAlbum(response[i]));
-  //   for (i=0; i<response.albums.length; i++){
-  //     console.log("for loop");
-  //     var album = renderAlbum(response.albums[i]);
-  //     console.log("album is ");
-  //     $("div#albums").append(album);   
-  //   }
-  //   $("#albums").append(renderAlbum(album));
     }
   });
 });
+
+$('#album-form form').submit(function(data){
+  $.post('/api/albums', function(req, res){
+    console.log(req.body);
+  });
+});
+
 
 
 // this function takes a single album and renders it to the page
@@ -125,4 +103,3 @@ function renderAlbum(album) {
 //       $('#albums').append(newAlbum);
 //     }
 // });
-
