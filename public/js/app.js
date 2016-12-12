@@ -33,20 +33,6 @@ sampleAlbums.push({
            });
 /* end of hard-coded data */
 
-// adds an album to the page from form data
-// $(document).ready(function(){
-//   $('#album-form').submit(function(event){
-//     $.post('/api/albums', function(event){
-//       console.log("ok");
-//       event.preventDefault();
-//       var formdata = $(this).serialize(); // serializeArray?;
-//       console.log(formdata);
-//       $('#albums').append(renderAlbum(formdata));
-//     });
-//   });
-// });
-
-
 // renders the albums from server.js to the page
 $(document).ready(function(){
   $.get('/api/albums', function(response){
@@ -54,13 +40,14 @@ $(document).ready(function(){
     $('#albums').append(renderAlbum(response[i]));
     }
   });
-    $('#album-form').submit(function(event){
-    $.post('/api/albums', function(){
-      console.log("ok");
-      event.preventDefault();
-      var formdata = $(this).serialize(); // serializeArray?;
-      console.log(formdata);
-      $('#albums').append(renderAlbum(formdata));
+// adds an album from form input
+  $('#album-form form').submit(function(req, res){
+    event.preventDefault();
+    console.log(this);
+    var data = $(this).deserialize();
+    // console.log(data.body);
+    $.post('/api/albums', data, function(){ // serializeArray?;
+      $('#albums').append(renderAlbum(data));
     });
   });
 });
