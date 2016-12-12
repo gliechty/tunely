@@ -41,14 +41,20 @@ $(document).ready(function(){
     }
   });
 // adds an album from form input
-  $('#album-form form').submit(function(req, res){
+  $('#album-form form').submit(function(event){
     event.preventDefault();
-    console.log(this);
-    var data = $(this).deserialize();
-    // console.log(data.body);
-    $.post('/api/albums', data, function(){ // serializeArray?;
-      $('#albums').append(renderAlbum(data));
+    var data = $(this).serializeArray();
+    var formObject = {
+      name: data[0].value,
+      artistName: data[1].value,
+      releaseDate: data[2].value,
+      genres: data[3].value
+    };
+    console.log(formObject);
+    $.post('/api/albums', formObject, function(){ // serializeArray?;
+      $('#albums').append(renderAlbum(formObject));
     });
+  $(this).trigger("reset");
   });
 });
 
