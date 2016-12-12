@@ -79,16 +79,14 @@ app.get('/api', function api_index (req, res){
 });
 
 
-// Populates api with albums
+// Gets all albums
 app.get('/api/albums', function album_index(req, res){
-  // db.Album.find({}, function (err, albums){ 
     res.json(albums);
   });
-  // res.json({albums:albums});
-// });
 
+
+// Ads
 app.post('/api/albums', function add_album(req, res){
-    console.log(req.body);
     res.json(req.body);
 });
 

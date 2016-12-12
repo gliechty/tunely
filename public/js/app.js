@@ -33,23 +33,35 @@ sampleAlbums.push({
            });
 /* end of hard-coded data */
 
-$('#album-form form').submit(function(){
-  alert("submitted!");
-  // event.preventDefault();
-  // var formdata = $(this).serialize();
-  // console.log(formdata);
-  // $.post('/api/albums', function(req, res){
-  //   console.log(req.body);
-  // });
-  // $(this).trigger("reset");
-});
+// adds an album to the page from form data
+// $(document).ready(function(){
+//   $('#album-form').submit(function(event){
+//     $.post('/api/albums', function(event){
+//       console.log("ok");
+//       event.preventDefault();
+//       var formdata = $(this).serialize(); // serializeArray?;
+//       console.log(formdata);
+//       $('#albums').append(renderAlbum(formdata));
+//     });
+//   });
+// });
 
-// console.log("getting this far");
+
+// renders the albums from server.js to the page
 $(document).ready(function(){
   $.get('/api/albums', function(response){
     for (i=0; i<(response).length; i++){
     $('#albums').append(renderAlbum(response[i]));
     }
+  });
+    $('#album-form').submit(function(event){
+    $.post('/api/albums', function(){
+      console.log("ok");
+      event.preventDefault();
+      var formdata = $(this).serialize(); // serializeArray?;
+      console.log(formdata);
+      $('#albums').append(renderAlbum(formdata));
+    });
   });
 });
 
@@ -98,10 +110,3 @@ function renderAlbum(album) {
   "          <!-- end one album -->";
   return albumHtml;
   }
-// //   // render to the page with jQuery
-//   $(document).ready(function(data){
-//     for (i=0; i<sampleAlbums.length;i++){
-//       var newAlbum = renderAlbum(sampleAlbums[i]);
-//       $('#albums').append(newAlbum);
-//     }
-// });
